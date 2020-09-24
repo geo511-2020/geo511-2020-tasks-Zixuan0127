@@ -22,7 +22,8 @@ JJA_mean = ggplot(temp,aes(YEAR,JJA))+
 Data from the Global Historical Climate Network 
 Red line is a LOESS smooth")+
   theme(axis.title = element_text(size = 16))
-ggsave('Case_study_2.png',plot = JJA_mean)
+ggsave('Case_study_2.png',plot = JJA_mean,
+       path = "E:/UB/Spatial Data Science/geo511-2020-tasks-Zixuan0127/week_02")
 print(JJA_mean)
 #JJA_indiv = JJA_mean +
 # geom_line(aes(y=JUN),color = 'coral' )+

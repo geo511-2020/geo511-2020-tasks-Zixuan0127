@@ -8,7 +8,7 @@ gapminder_noKuwait = gapminder %>%
   filter(country != "Kuwait")
 # Plot 1
 fig1 = ggplot(gapminder_noKuwait,aes(lifeExp,gdpPercap, color = continent,
-                                     size = pop/1000000))+
+                                     size = pop/100000))+
   geom_point()+
   facet_wrap( ~ year, nrow =1)+
   scale_y_continuous(trans = "sqrt")+
@@ -28,9 +28,9 @@ gapminder_con_year = gapminder %>%
 fig2 = 
   ggplot(gapminder_con_year,aes(year,gdpPercapweighted))+
   geom_line(data = gapminder_noKuwait,aes(year,gdpPercap,color = continent,group = country))+
-  geom_point(data = gapminder_noKuwait,aes(year,gdpPercap,color = continent,size = pop/1000000))+
+  geom_point(data = gapminder_noKuwait,aes(year,gdpPercap,color = continent,size = pop/100000))+
   geom_line()+
-  geom_point(aes(size = pop/1000000))+
+  geom_point(aes(size = pop/100000))+
   facet_wrap(~ continent, nrow =1)+
   labs(x="Year",
        y= "GDP Per Capita",
@@ -41,5 +41,7 @@ fig2 =
 print(fig2)
 
 # Save the figs
-ggsave("case_study_3_fig_1.png",plot = fig1,width = 15, unit = "in")
-ggsave("case_study_3_fig_2.png",plot = fig2,width = 15, unit = "in")
+ggsave("case_study_3_fig_1.png",plot = fig1,width = 15, unit = "in",
+       path = "E:/UB/Spatial Data Science/geo511-2020-tasks-Zixuan0127/week_03")
+ggsave("case_study_3_fig_2.png",plot = fig2,width = 15, unit = "in",
+       path = "E:/UB/Spatial Data Science/geo511-2020-tasks-Zixuan0127/week_03")
