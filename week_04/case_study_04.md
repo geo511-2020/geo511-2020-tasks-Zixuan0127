@@ -1,7 +1,25 @@
+Case Study 04
+================
+Zixuan Chen
+August 1, 2020
+
+## Summary
+
+In this case study, out goal is to find out the farest airport from NYC.
+
+## Load packages
+
+``` r
 library(tidyverse)
 library(nycflights13)
-library(ggmap)
-library(tmap)
+```
+
+## Cleaning Data
+
+I connected the datasets by common column, and filtered the data I
+wanted.
+
+``` r
 # Create keys same as flights
 airports_dest = airports %>%
   mutate(dest = faa,
@@ -11,22 +29,31 @@ airports_ori = airports %>%
   mutate(origin = faa,
          ori_name = name) %>%
   select(ori_name,origin)
+
 # Joint table
 all = flights %>%
   left_join(airlines,by = "carrier")
+
 # Filter the airports at NYC
 all_nyc = all %>%
   filter(origin == "JFK"| origin == "LGA" | origin == "EWR")%>%
   arrange(desc(distance))
+
 # replace the Abb. by full name
 all_nyc = all_nyc %>%
   left_join(airports_dest, by = "dest")%>%
   mutate(dest = dest_name,.keep = 'unused')%>%
   left_join(airports_ori, by ="origin")%>%
   mutate(origin = ori_name, .keep = 'unused')
+
 # full name for airline. 
 all_nyc = all_nyc%>%
   mutate(carrier = name,.keep = 'unused')
+```
+
+## Results
+
+``` r
 # find the farthest airport 
 # JFK
 jfk = all_nyc %>%
@@ -60,25 +87,6 @@ nyc_far = nyc_far %>%
 print(paste("The farest airport from NYC is ",head(nyc_far$dest,n=1),
             ", and the distance is ",head(nyc_far$distance, n=1 ),
             "KM (I guess,there was no unit in tables.)."))
+```
 
-# Extra Works
-airports %>%
-  distinct(lon,lat) %>%
-  ggplot(aes(lon, lat)) +
-  borders("world") +
-  geom_point(col="red") +
-  coord_quickmap()
-
-all %>%
-  filter(arr_delay != is.na(arr_delay))%>%
-  group_by(dest)%>%
-  summarize(time = mean(arr_delay))%>%
-  inner_join(airports_dest, .by = "dest")%>%
-  mutate(name = dest_name, .keep = "unused")%>%
-  inner_join(airports, .by = "name")%>%
-  distinct(lon,lat) %>%
-  ggplot(aes(lon, lat)) +
-  borders("world") +
-  geom_point() +
-  coord_quickmap()
-
+    ## [1] "The farest airport from NYC is  Honolulu Intl , and the distance is  4983 KM (I guess,there was no unit in tables.)."
