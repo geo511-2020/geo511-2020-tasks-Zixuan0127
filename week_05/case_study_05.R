@@ -24,8 +24,7 @@ p1 = ggplot(New_york)+
   labs(title = "New York Land within 10 km")+
   theme(legend.position = "none",
         plot.title = element_text(size = 20,
-                                  hjust = 0.4)
-        )
+                                  hjust = 0.4))
 
 area_ny = units::set_units(st_area(border),km^2)
 print(p1)
