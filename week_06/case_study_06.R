@@ -32,5 +32,6 @@ hottest_country = st_set_geometry(max_tem,value = NULL)
 hottest_country = hottest_country%>%
   select(continent,name_long,tmax)%>%
   group_by(continent)%>%
-  top_n(1)
+  top_n(1)%>%
+  arrange(desc(tmax))
 print(hottest_country)
