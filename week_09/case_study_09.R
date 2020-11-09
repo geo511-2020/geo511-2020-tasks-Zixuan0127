@@ -12,6 +12,7 @@ download.file(dataurl,destfile=file.path(tdir,"temp.zip"))
 unzip(file.path(tdir,"temp.zip"),exdir = tdir)
 list.files(tdir)
 storm_data <- read_sf(list.files(tdir,pattern=".shp",full.names = T))
+
 storm_data = storm_data%>%
   filter(SEASON >= 1950)%>%
   mutate_if(is.numeric,function(x) ifelse(x==-999.0,NA,x))%>%
@@ -27,7 +28,9 @@ p1 = ggplot(storm_data)+
   scale_fill_distiller(palette="YlOrRd", trans="log", direction=-1, breaks = c(1,10,100,1000))+
   coord_sf(ylim=region[c(2,4)], xlim=region[c(1,3)])+
   theme(axis.title = element_blank())
-  
+
+plot(p1)
+
 us_states = st_transform(us_states,crs = st_crs(storm_data))
 us_states = us_states%>%
   select(state = NAME)
