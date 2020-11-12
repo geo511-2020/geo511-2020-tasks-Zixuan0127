@@ -159,7 +159,7 @@ lst=setZ(lst,tdates)
 #Part 1
 lw=SpatialPoints(data.frame(x= -78.791547,y=43.007211))
 projection(lw) = "+proj=longlat"
-lw = spTransform(lw,CRS(lst))
+lw = spTransform(lw,"+proj=longlat")
 lw_lst = raster::extract(lst,lw,buffer=1000,fun=mean,na.rm=T)%>%
   t()
 lst_date = getZ(lst)
@@ -177,7 +177,7 @@ names(lst_month) = month.name
 gplot(lst_month)+
   geom_tile(aes(fill = value))+
   facet_wrap(~variable)+
-  scale_fill_gradientn(colours = terrain.colors(10))+
+  scale_fill_gradientn(colours=c("blue",mid="grey","red"))+
   theme(axis.text = element_blank())
 
 cellStats(lst_month,mean)%>%
