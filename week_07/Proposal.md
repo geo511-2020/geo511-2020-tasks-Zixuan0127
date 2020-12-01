@@ -1,0 +1,51 @@
+Project Proposal
+================
+Zixuan Chen
+11/30/2020
+
+# Introduction
+
+Precipitation is an essential element for hydrologic modeling. The
+distribution of rainfall in a specific area provides necessary
+information for the climate. Thus, it is imperative that analyzes the
+distribution of precipitation. This project is going to create an
+interactive map for New York State. The map could provide the necessary
+information on precipitation, like mean, maximum, and minimum. The data
+and plots give a further understanding of the climate in New York State.
+
+# Example
+
+This picture is an interactive map from the USGS. However, it only shows
+the information about stations, like site number, site name, and agency.
+It is unclear about the precipitation. This project wants to improve the
+map by adding more details of precipitation. The updated interactive map
+could indicate the trend of precipitation by plot; it also could show
+the essential information for analysis.
+![](E:/UB/Spatial%20Data%20Science/geo511-2020-tasks-Zixuan0127/week_07/example.jpg)
+
+# Data Source
+
+All of the data is from the
+[USGS](https://waterdata.usgs.gov/ny/nwis/current/?type=precip&group_key=county_cd).There
+are 35 stations, which means there would be 35 marked signs in the map.
+Each station has the data of precipitation but the time period is
+varied.
+
+# Methods
+
+This project will use some packages, for example, ggplot2, tidyverse,
+mapview, etc. Firstly, this project would download the data from the
+website directly. Because the time interval of data is 15 minutes, it is
+necessary that transform the interval to one day by sum the data in the
+same day. This step also transforms the time data to Date. Then, a list
+of data for each station would be created by order, and it is efficient
+that plotting each data set and saving to the list by for loop. Lastly,
+the spatial information would be inserted into each station, and the
+mepview function could create an interactive map.
+
+# Results
+
+The results would include the interactive map. For each marked dot, it
+would show a plot of precipitation during a recording time. It would
+also show the details for this station’s precipitation, like mean,
+maximum, and minimum.
